@@ -3,6 +3,7 @@ const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const { DefinePlugin } = require('webpack')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const dotenv = require('dotenv').config({
   path: path.join(__dirname, '.env')
 });
@@ -26,6 +27,7 @@ module.exports = {
         use: [
           'vue-style-loader',
           'style-loader',
+          MiniCssExtractPlugin.loader,
           'css-loader'
         ],
       },
@@ -34,6 +36,7 @@ module.exports = {
         use: [
           'vue-style-loader',
           'style-loader',
+          MiniCssExtractPlugin.loader,
           'css-loader',
           'sass-loader'
         ],
@@ -91,6 +94,12 @@ module.exports = {
   plugins: [
     new VueLoaderPlugin(),
     new CleanWebpackPlugin(),
+    new MiniCssExtractPlugin(
+      {
+        filename: 'css/[name].[contenthash:8].css',
+        chunkFilename: 'css/[name].[contenthash:8].css'
+      }
+    ),
     new HtmlWebpackPlugin({
       title: 'Vigrom test',
       template: path.resolve(__dirname, './public/index.html'),
