@@ -9,6 +9,7 @@ const dotenv = require('dotenv').config({
 
 module.exports = {
   entry: './src/main.js',
+
   output: {
     path: path.resolve(__dirname, './dist'),
     filename: 'js/[name].js',
@@ -43,7 +44,16 @@ module.exports = {
         use: {
           loader: "babel-loader",
           options: {
-            presets: ["@babel/preset-env"]
+            presets: [
+              [
+                "@babel/preset-env",
+                {
+                  "targets": {
+                    "node": "10"
+                  }
+                }
+              ],
+            ]
           }
         }
       },

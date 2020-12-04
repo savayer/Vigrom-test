@@ -4,7 +4,7 @@
       Sign up
     </template>
 
-    <b-form @submit="onSubmit">
+    <b-form @submit="register">
       <b-form-group id="group1" label-for="name">
         <b-form-input
           id="name"
@@ -55,7 +55,7 @@
       </b-form-group>
 
       <b-form-group class="text-right">
-        <b-button type="submit"  variant="primary">Sign up</b-button>
+        <b-button type="submit" :disabled="isLoading" variant="primary">Sign up</b-button>
       </b-form-group>
     </b-form>
 
@@ -83,6 +83,7 @@
     },
     data() {
       return {
+        isLoading: false,
         form: {
           email: '',
           name: '',
@@ -100,25 +101,17 @@
       }
     },
     methods: {
-      onSubmit(evt) {
-        evt.preventDefault()
-        this.$v.$touch()
-        if (!this.$v.$invalid) {
-
-        }
-      },
-      onReset(evt) {
-        evt.preventDefault()
-        // Reset our form values
-        this.form.email = ''
-        this.form.name = ''
-        this.form.food = null
-        this.form.checked = []
-        // Trick to reset/clear native browser form validation state
-        this.show = false
-        this.$nextTick(() => {
-          this.show = true
-        })
+      async register (e) {
+        e.preventDefault()
+        try {
+          this.$v.$touch()
+          if (!this.$v.$invalid) {
+            this.isLoading = true
+            await this.$store.dispatch("signUp", this.form)
+            this.$bvModal.hide('sign-up')
+          }
+        } catch (e) {}
+        this.isLoading = false
       }
     }
   }

@@ -4,7 +4,7 @@
       Sign in
     </template>
 
-    <b-form @submit="onSubmit">
+    <b-form @submit="login">
       <b-form-group id="input-group-1" label-for="email">
         <b-form-input
           id="email"
@@ -26,7 +26,7 @@
       </b-form-group>
 
       <b-form-group class="text-right">
-        <b-button type="submit"  variant="primary">Sign in</b-button>
+        <b-button type="submit" :disabled="isLoading" variant="primary">Sign in</b-button>
       </b-form-group>
     </b-form>
 
@@ -38,6 +38,7 @@
     name: 'Signin',
     data() {
       return {
+        isLoading: false,
         form: {
           email: '',
           password: ''
@@ -45,10 +46,15 @@
       }
     },
     methods: {
-      onSubmit(e) {
+      async login (e) {
         e.preventDefault()
-        alert(JSON.stringify(this.form))
-      }
+        try {
+          this.isLoading = true
+          await this.$store.dispatch("login", this.form)
+          this.$bvModal.hide('sign-in')
+        } catch (e) {}
+        this.isLoading = false
+      },
     }
   }
 </script>

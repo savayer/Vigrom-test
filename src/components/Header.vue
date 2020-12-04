@@ -10,12 +10,12 @@
         <b-nav-item to="/info" :active="$route.name === 'Info'">Info</b-nav-item>
       </b-navbar-nav>
 
-      <b-navbar-nav class="ml-auto" v-if="!isLoggedIn">
+      <b-navbar-nav class="ml-auto" v-if="!username">
         <b-nav-item href="#" @click.prevent="$bvModal.show('sign-in')">Sign in</b-nav-item>
         <b-nav-item href="#" @click.prevent="$bvModal.show('sign-up')">Sign up</b-nav-item>
       </b-navbar-nav>
 
-      <b-navbar-nav class="ml-auto" v-if="isLoggedIn">
+      <b-navbar-nav class="ml-auto" v-if="username">
         <b-nav-item-dropdown right>
           <template #button-content>
             <em>{{ username }}</em>
@@ -29,22 +29,20 @@
 </template>
 
 <script>
-  import IsLoggedIn from "../mixins/IsLoggedIn";
-
   export default {
     name: 'Header',
-    mixins: [
-      IsLoggedIn
-    ],
     computed: {
       username () {
-        return this.$store.getters.getUser.name
+        return this.$store.getters.getUser
       }
     },
     methods: {
       logout () {
         this.$store.dispatch('logout')
       }
+    },
+    mounted () {
+      this.$store.dispatch('getUser');
     }
   }
 </script>
