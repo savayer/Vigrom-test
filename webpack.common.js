@@ -2,6 +2,10 @@ const path = require('path')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const { DefinePlugin } = require('webpack')
+const dotenv = require('dotenv').config({
+  path: path.join(__dirname, '.env')
+});
 
 module.exports = {
   entry: './src/main.js',
@@ -49,6 +53,23 @@ module.exports = {
         options: {
           name: '[name].[ext]?[hash]'
         }
+      },
+      {
+        test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/i,
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+              limit: 4096,
+              fallback: {
+                loader: 'file-loader',
+                options: {
+                  name: 'fonts/[name].[hash:8].[ext]'
+                }
+              }
+            }
+          }
+        ]
       }
     ]
   },
@@ -64,5 +85,10 @@ module.exports = {
       title: 'Vigrom test',
       template: path.resolve(__dirname, './public/index.html'),
     }),
+    new DefinePlugin(
+        {
+        'process.env': JSON.stringify(dotenv.parsed)
+      }
+    ),
   ]
 }
