@@ -9,16 +9,16 @@ const state = {
 };
 
 const getters = {
-  apiBaseUrl: state => state.apiBaseUrl,
-  token: state => state.token,
-  user: state => state.user,
+  getApiBaseUrl: state => state.apiBaseUrl,
+  getToken: state => state.token,
+  getUser: state => state.user,
 };
 
 const mutations = {
-  token(state, token) {
+  setToken(state, token) {
     state.token = token
   },
-  user(state, user) {
+  setUser(state, user) {
     if (user === null) {
       localStorage.removeItem('user')
     } else {
@@ -31,7 +31,8 @@ const mutations = {
 
 const actions = {
   logout({ commit }) {
-    commit('token', null)
+    commit('setToken', null)
+    commit('setUser', null)
   }
 }
 

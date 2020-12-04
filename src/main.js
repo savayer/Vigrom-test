@@ -9,13 +9,7 @@ import axios from 'axios'
 
 Vue.config.productionTip = false
 
-axios.defaults.baseURL = store.getters.apiBaseUrl
-if (store.getters.token) {
-  axios.defaults.headers = {
-    Authorization: `Bearer ${store.getters.token.token}`,
-    'X-Requested-With': 'XMLHttpRequest'
-  }
-}
+axios.defaults.baseURL = store.getters.getApiBaseUrl
 Vue.prototype.$axios = axios
 
 Vue.use(VueCookie)
