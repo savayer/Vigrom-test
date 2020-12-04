@@ -3,7 +3,6 @@ import { BootstrapVue } from "bootstrap-vue";
 import App from "@/App.vue";
 import router from "@/routes";
 import store from "@/store";
-import VueCookie from "vue-cookie";
 import Vuelidate from "vuelidate";
 import axios from 'axios'
 
@@ -17,7 +16,6 @@ axios.defaults.baseURL = process.env.VUE_APP_API_BASE_URL
 console.log(process.env.VUE_APP_API_BASE_URL)
 Vue.prototype.$axios = axios
 
-Vue.use(VueCookie)
 Vue.use(Vuelidate)
 Vue.use(BootstrapVue)
 
