@@ -3,9 +3,9 @@
     <Signin />
     <Signup />
     <Header />
-    <main class="container mt-5">
-      <HomeContent />
-    </main>
+    <div class="container mt-5">
+      <InfoContent />
+    </div>
   </div>
 </template>
 
@@ -13,12 +13,12 @@
   import Header from "@/components/Header.vue";
   import Signin from "@/components/Auth/Signin.vue";
   import Signup from "@/components/Auth/Signup.vue";
-  import HomeContent from "@/components/HomeContent.vue";
+  import InfoContent from "@/components/InfoContent.vue";
 
   export default {
-    name: 'Home',
+    name: 'Info',
     components: {
-      HomeContent,
+      InfoContent,
       Signin,
       Signup,
       Header
