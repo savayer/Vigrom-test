@@ -5,18 +5,21 @@ import auth from "./auth";
 Vue.use(Vuex)
 
 const state = {
-  apiBaseUrl: process.env.VUE_APP_API_BASE_URL,
-  user: null
+  user: null,
+  isLoggedIn: false
 };
 
 const getters = {
-  getApiBaseUrl: state => state.apiBaseUrl,
   getUser: state => state.user,
+  getIsLoggedIn: state => state.isLoggedIn
 };
 
 const mutations = {
   setUser(state, user) {
     state.user = user
+  },
+  setIsLoggedIn(state, flag) {
+    state.isLoggedIn = flag
   }
 }
 

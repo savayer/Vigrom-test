@@ -13,7 +13,7 @@
   import Header from "@/components/Header.vue";
   import Signin from "@/components/Auth/Signin.vue";
   import Signup from "@/components/Auth/Signup.vue";
-  import InfoContent from "@/components/InfoContent.vue";
+  import InfoContent from "@/components/Info/InfoContent.vue";
 
   export default {
     name: 'Info',

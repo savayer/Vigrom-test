@@ -15,11 +15,20 @@
     <p id="34c9" data-selectable-paragraph="">And with growing stores, the problem only gets bigger since you always have to juggle the mutations and actions. I would suggest using the actions only for mutating the store. Every other kind of logic should be separated into service files.</p>
     <p id="9f5c" data-selectable-paragraph="">Since Vuex recommends you only changing the state from within the mutation block you are basically stuck with the boilerplate pattern above. But gladly we will implement an alternative in a few seconds :).</p>
     <p style="text-align: center; font-size: 15px;"><br /><br /></p>
+
+    <div class="mt-5">
+      <Comments />
+    </div>
   </article>
 </template>
 
 <script>
+  import Comments from "@/components/Info/Comments.vue";
+
   export default {
     name: 'InfoContent',
+    components: {
+      Comments
+    },
   }
 </script>

@@ -10,12 +10,12 @@
         <b-nav-item to="/info" :active="$route.name === 'Info'">Info</b-nav-item>
       </b-navbar-nav>
 
-      <b-navbar-nav class="ml-auto" v-if="!username">
+      <b-navbar-nav class="ml-auto" v-if="!isLoggedIn">
         <b-nav-item href="#" @click.prevent="$bvModal.show('sign-in')">Sign in</b-nav-item>
         <b-nav-item href="#" @click.prevent="$bvModal.show('sign-up')">Sign up</b-nav-item>
       </b-navbar-nav>
 
-      <b-navbar-nav class="ml-auto" v-if="username">
+      <b-navbar-nav class="ml-auto" v-if="isLoggedIn">
         <b-nav-item-dropdown right>
           <template #button-content>
             <em>{{ username }}</em>
@@ -29,13 +29,13 @@
 </template>
 
 <script>
+  import GetAuthDataMixin from "@/mixins/GetAuthDataMixin";
+
   export default {
     name: 'Header',
-    computed: {
-      username () {
-        return this.$store.getters.getUser
-      }
-    },
+    mixins: [
+      GetAuthDataMixin
+    ],
     methods: {
       logout () {
         this.$store.dispatch('logout')

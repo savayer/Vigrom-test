@@ -13,7 +13,7 @@
   import Header from "@/components/Header.vue";
   import Signin from "@/components/Auth/Signin.vue";
   import Signup from "@/components/Auth/Signup.vue";
-  import HomeContent from "@/components/HomeContent.vue";
+  import HomeContent from "@/components/Home/HomeContent.vue";
 
   export default {
     name: 'Home',

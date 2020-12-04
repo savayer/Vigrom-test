@@ -13,7 +13,8 @@ import "firebase/database";
 
 Vue.config.productionTip = false
 
-axios.defaults.baseURL = store.getters.getApiBaseUrl
+axios.defaults.baseURL = process.env.VUE_APP_API_BASE_URL
+console.log(process.env.VUE_APP_API_BASE_URL)
 Vue.prototype.$axios = axios
 
 Vue.use(VueCookie)
